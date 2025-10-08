@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bộ Công Cụ: Tuần 3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Oswald', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4 { font-family: 'Oswald', sans-serif; }
+        .nav-link { transition: all 0.3s ease; border-bottom: 4px solid transparent; color: #5C6BC0; padding: 12px 20px; text-transform: uppercase; font-weight: 500; font-size: 1rem; }
+        .nav-link.active { border-bottom-color: #009688; color: #009688; }
+        .content-section { display: none; }
+        .content-section.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .tool-card { background-color: white; padding: 2rem; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); }
+        textarea, input[type="text"] { width: 100%; border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; transition: all 0.3s ease; font-family: sans-serif; font-size: 1rem; }
+        textarea:focus, input:focus { outline: none; border-color: #FF9800; box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.2); }
+        .tool-label { font-weight: 600; color: #1a237e; margin-bottom: 0.5rem; display: block; }
+        #copy-notification { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #1a237e; color: white; padding: 12px 24px; border-radius: 8px; z-index: 100; opacity: 0; transition: opacity 0.5s ease, transform 0.5s ease; visibility: hidden; }
+        #copy-notification.show { opacity: 1; transform: translateX(-50%) translateY(-20px); visibility: visible; }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#1a237e]">Bộ Công Cụ Tuần 3</h1>
+            <p class="mt-3 text-lg text-slate-600 max-w-3xl mx-auto">Các công cụ hỗ trợ cho buổi Group Call #1: "Tháo Gỡ Thách Thức Ban Đầu".</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b border-slate-200 mb-10">
+            <button data-target="fear" class="nav-link active">Vòng Tròn Chia Sẻ</button>
+            <button data-target="video" class="nav-link">Phân Tích Video</button>
+            <button data-target="goal" class="nav-link">Mục Tiêu Tuần 4</button>
+        </nav>
+
+        <main class="max-w-5xl mx-auto">
+            <!-- Tool 1: Fear Sharing -->
+            <section id="fear" class="content-section active">
+                <div class="tool-card">
+                    <h2 class="text-3xl font-bold text-[#009688] mb-4">Công Cụ: Vòng Tròn Chia Sẻ & Group Coaching</h2>
+                     <div class="p-4 bg-teal-50 rounded-lg border-l-4 border-teal-400 text-slate-700 mb-6">
+                        <h4 class="font-bold mb-1 text-[#009688]">Mục Đích Cốt Lõi</h4>
+                        <p>Cung cấp một cấu trúc an toàn để chia sẻ và một bộ câu hỏi quyền năng để nhóm có thể hỗ trợ coaching lẫn nhau một cách hiệu quả, thay vì sa vào việc đưa ra lời khuyên.</p>
+                    </div>
+                    <h3 class="text-xl font-semibold text-[#1a237e] mb-3">Gợi ý các câu hỏi coaching cho nhóm:</h3>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700 mb-6">
+                        <li>Điều gì trong thách thức này là quan trọng nhất đối với bạn?</li>
+                        <li>Bạn đã thử những cách nào rồi?</li>
+                        <li>Nếu có một cây đũa thần, bạn sẽ muốn giải pháp lý tưởng trông như thế nào?</li>
+                        <li>Giả sử bạn có tất cả sự tự tin cần thiết, bạn sẽ làm gì khác đi?</li>
+                        <li>Bước nhỏ nhất bạn có thể làm ngay trong tuần này để tiến gần hơn đến giải pháp là gì?</li>
+                    </ul>
+                     <div class="pt-6 border-t border-slate-200">
+                        <label for="facilitatorNotes" class="tool-label">Ghi chú cho người điều phối:</label>
+                        <textarea id="facilitatorNotes" rows="5" placeholder="Ghi lại những thách thức chung, những ý tưởng đột phá và các cam kết của nhóm..."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tool 2: Video Analysis -->
+            <section id="video" class="content-section">
+                 <div class="tool-card">
+                    <h2 class="text-3xl font-bold text-[#009688] mb-4">Công Cụ: Phiếu Quan Sát Coaching</h2>
+                    <div class="p-4 bg-teal-50 rounded-lg border-l-4 border-teal-400 text-slate-700 mb-6">
+                        <h4 class="font-bold mb-1 text-[#009688]">Mục Đích Cốt Lõi</h4>
+                        <p>Cung cấp một lăng kính có cấu trúc để quan sát và phân tích một phiên coaching, giúp học viên tập trung vào những hành vi và kỹ năng cụ thể, từ đó học hỏi một cách sâu sắc hơn.</p>
+                    </div>
+                    <div class="space-y-4" id="observation-checklist">
+                        <div>
+                            <label class="tool-label">Kỹ năng Lắng nghe chủ động:</label>
+                            <textarea rows="2" placeholder="Người coach đã phản chiếu, tóm tắt, hay làm rõ ý của người được coach như thế nào? Ghi lại một ví dụ cụ thể."></textarea>
+                        </div>
+                         <div>
+                            <label class="tool-label">Kỹ năng Đặt câu hỏi quyền năng:</label>
+                            <textarea rows="2" placeholder="Câu hỏi nào đã giúp người được coach suy nghĩ sâu hơn hoặc nhìn vấn đề theo một hướng khác?"></textarea>
+                        </div>
+                        <div>
+                            <label class="tool-label">Tạo không gian tin tưởng:</label>
+                            <textarea rows="2" placeholder="Ngôn ngữ cơ thể, giọng nói, và cách thể hiện của người coach đã góp phần tạo ra sự an toàn như thế nào?"></textarea>
+                        </div>
+                         <div>
+                            <label class="tool-label">Khoảnh khắc đột phá (Aha!):</label>
+                            <textarea rows="2" placeholder="Theo bạn, đâu là bước ngoặt của cuộc trò chuyện và điều gì đã tạo ra nó?"></textarea>
+                        </div>
+                         <div>
+                            <label class="tool-label">Bài học lớn nhất của bạn:</label>
+                            <textarea rows="2" placeholder="Sau khi quan sát, bạn rút ra được bài học gì cho việc thực hành coaching của chính mình?"></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-4 border-t flex justify-end">
+                        <button id="copyObservation" class="bg-[#FF9800] hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">Sao chép Ghi Chú</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tool 3: Week 4 Goal -->
+            <section id="goal" class="content-section">
+                <div class="tool-card">
+                    <h2 class="text-3xl font-bold text-[#009688] mb-4">Công Cụ: Thiết Lập Mục Tiêu Tuần 4</h2>
+                    <div class="p-4 bg-teal-50 rounded-lg border-l-4 border-teal-400 text-slate-700 mb-6">
+                        <h4 class="font-bold mb-1 text-[#009688]">Mục Đích Cốt Lõi</h4>
+                        <p>Biến một cuộc thảo luận thành một cam kết hành động rõ ràng. Việc ghi lại mục tiêu chung giúp mọi người có cùng một định hướng và tăng cường trách nhiệm cho các buổi thực hành sắp tới.</p>
+                    </div>
+                    <div>
+                        <label for="week4goal" class="tool-label">Trọng tâm thực hành cho Peer Coaching Tuần 4:</label>
+                        <textarea id="week4goal" rows="4" placeholder="Ví dụ: 'Trong các buổi Peer Coaching tuần 4, chúng ta cam kết tập trung vào kỹ năng Lắng nghe chủ động. Cụ thể, mỗi người quan sát sẽ đếm số lần người coach đặt câu hỏi so với số lần phản chiếu và tóm tắt lại ý của người được coach, với mục tiêu tăng cường sự lắng nghe.'"></textarea>
+                    </div>
+                    <div class="mt-8 pt-4 border-t flex justify-end">
+                        <button id="copyGoal" class="bg-[#FF9800] hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">Sao chép Mục Tiêu</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center mt-12 py-6 text-slate-600 text-base border-t-2 border-slate-200">
+            <p class="font-semibold">Rosie Đào Hạnh Giang - CEO Build Talents</p>
+        </footer>
+
+        <div id="copy-notification">Đã sao chép vào bộ nhớ tạm!</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+            const notification = document.getElementById('copy-notification');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    const targetId = link.dataset.target;
+                    contentSections.forEach(section => section.classList.toggle('active', section.id === targetId));
+                    navLinks.forEach(navLink => navLink.classList.toggle('active', navLink.dataset.target === targetId));
+                });
+            });
+
+            function showCopyNotification() {
+                notification.classList.add('show');
+                setTimeout(() => notification.classList.remove('show'), 2000);
+            }
+
+            // Tool 2: Video Analysis
+            const copyObservationBtn = document.getElementById('copyObservation');
+            copyObservationBtn.addEventListener('click', () => {
+                let textToCopy = "GHI CHÚ QUAN SÁT COACHING\n---------------------------------\n\n";
+                const fields = document.querySelectorAll('#observation-checklist textarea');
+                fields.forEach(field => {
+                    const label = field.previousElementSibling.textContent;
+                    textToCopy += `${label}\n${field.value}\n\n`;
+                });
+                navigator.clipboard.writeText(textToCopy.trim()).then(showCopyNotification);
+            });
+
+            // Tool 3: Week 4 Goal
+            const copyGoalBtn = document.getElementById('copyGoal');
+            copyGoalBtn.addEventListener('click', () => {
+                 const goalText = `MỤC TIÊU PEER COACHING TUẦN 4\n---------------------------------\n${document.getElementById('week4goal').value}`;
+                 navigator.clipboard.writeText(goalText.trim()).then(showCopyNotification);
+            });
+        });
+    </script>
+</body>
+</html>
