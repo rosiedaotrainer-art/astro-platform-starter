@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bộ Công Cụ: Tuần 4</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Oswald', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4 { font-family: 'Oswald', sans-serif; }
+        .nav-link { transition: all 0.3s ease; border-bottom: 4px solid transparent; color: #5C6BC0; padding: 12px 20px; text-transform: uppercase; font-weight: 500; font-size: 1rem; }
+        .nav-link.active { border-bottom-color: #009688; color: #009688; }
+        .content-section { display: none; }
+        .content-section.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .tool-card { background-color: white; padding: 2rem; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); }
+        textarea { width: 100%; border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; transition: all 0.3s ease; font-family: sans-serif; font-size: 1rem; }
+        textarea:focus { outline: none; border-color: #FF9800; box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.2); }
+        .tool-label { font-weight: 600; color: #1a237e; margin-bottom: 0.5rem; display: block; }
+        #copy-notification { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #1a237e; color: white; padding: 12px 24px; border-radius: 8px; z-index: 100; opacity: 0; transition: opacity 0.5s ease, transform 0.5s ease; visibility: hidden; }
+        #copy-notification.show { opacity: 1; transform: translateX(-50%) translateY(-20px); visibility: visible; }
+        /* Range slider styles */
+        .range-slider-container { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 1rem; }
+        input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; background: #ddd; border-radius: 5px; outline: none; }
+        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; background: #FF9800; border-radius: 50%; cursor: pointer; }
+        input[type="range"]::-moz-range-thumb { width: 24px; height: 24px; background: #FF9800; border-radius: 50%; cursor: pointer; }
+        .range-value { font-weight: bold; color: #FF9800; font-size: 1.25rem; min-width: 40px; text-align: center; }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#1a237e]">Bộ Công Cụ Tuần 4</h1>
+            <p class="mt-3 text-lg text-slate-600 max-w-3xl mx-auto">Các công cụ hỗ trợ cho hoạt động Peer Coaching #1.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b border-slate-200 mb-10">
+            <button data-target="triad" class="nav-link active">Bộ Ba Coaching</button>
+            <button data-target="submission" class="nav-link">Nộp Bài Tập</button>
+            <button data-target="assessment" class="nav-link">Tự Đánh Giá</button>
+        </nav>
+
+        <main class="max-w-5xl mx-auto">
+            <!-- Tool 1: Coaching Triad -->
+            <section id="triad" class="content-section active">
+                <div class="tool-card">
+                    <h2 class="text-3xl font-bold text-[#009688] mb-4">Phiếu Quan Sát Dành Cho "Người Quan Sát"</h2>
+                    <div class="p-4 bg-teal-50 rounded-lg border-l-4 border-teal-400 text-slate-700 mb-6">
+                        <h4 class="font-bold mb-1 text-[#009688]">Mục Đích Cốt Lõi</h4>
+                        <p>Cung cấp một lăng kính có cấu trúc để đưa ra phản hồi cụ thể, khách quan và mang tính xây dựng. Thay vì nói "bạn làm tốt lắm", công cụ này giúp bạn chỉ ra "bạn đã làm tốt điều X, và điều đó tạo ra tác động Y".</p>
+                    </div>
+                    <div class="space-y-4" id="observation-form">
+                        <div>
+                            <label class="tool-label">Trọng tâm quan sát (Theo mục tiêu Tuần 4):</label>
+                            <textarea rows="2" placeholder="Ví dụ: Tập trung quan sát kỹ năng Lắng nghe chủ động (phản chiếu, tóm tắt) và các câu hỏi mở giúp khơi gợi."></textarea>
+                        </div>
+                         <div>
+                            <label class="tool-label">Một điều người coach đã làm rất tốt:</label>
+                            <textarea rows="2" placeholder="Ví dụ: 'Khi coachee chia sẻ về khó khăn, bạn đã tóm tắt lại rất chính xác: 'Vậy có phải điều khiến bạn lo lắng nhất là...'. Điều này làm coachee cảm thấy được lắng nghe sâu sắc.'"></textarea>
+                        </div>
+                        <div>
+                            <label class="tool-label">Một câu hỏi quyền năng nhất mà người coach đã đặt:</label>
+                            <textarea rows="2" placeholder="Ví dụ: Câu hỏi 'Điều gì sẽ khác đi nếu bạn giải quyết được việc này?' đã thực sự giúp coachee hình dung về kết quả và có thêm động lực."></textarea>
+                        </div>
+                         <div>
+                            <label class="tool-label">Một gợi ý để làm tốt hơn vào lần sau:</label>
+                            <textarea rows="2" placeholder="Ví dụ: 'Có một vài khoảnh khắc im lặng rất giá trị, lần tới bạn có thể thử giữ sự im lặng đó thêm một chút nữa để xem coachee có chia sẻ thêm điều gì sâu hơn không.'"></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-4 border-t flex justify-end">
+                        <button id="copyObservationBtn" class="bg-[#FF9800] hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">Sao chép Phiếu Quan Sát</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tool 2: Submission -->
+            <section id="submission" class="content-section">
+                <div class="tool-card">
+                    <h2 class="text-3xl font-bold text-[#009688] mb-4">Hướng Dẫn Nộp Bài Tập</h2>
+                    <div class="p-4 bg-teal-50 rounded-lg border-l-4 border-teal-400 text-slate-700 mb-6">
+                        <h4 class="font-bold mb-1 text-[#009688]">Mục Đích Cốt Lõi</h4>
+                        <p>Đảm bảo việc học tập được củng cố và giảng viên có đủ thông tin để hỗ trợ nhóm một cách tốt nhất. Đây là hành động thể hiện sự cam kết và trách nhiệm với quá trình phát triển của bản thân và của cả nhóm.</p>
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p class="font-semibold">Vui lòng nộp lại 2 tài liệu sau cho giảng viên trong vòng 24 giờ sau buổi thực hành:</p>
+                        <ul class="list-decimal list-inside ml-4 space-y-2">
+                            <li><strong>Nhật Ký Coaching của bạn:</strong> Hoàn thành dựa trên phiên bạn đóng vai trò là Coach. (Sử dụng mẫu trong Bộ Công Cụ Tuần 1-2).</li>
+                            <li><strong>Phiếu Quan Sát bạn nhận được:</strong> Bản ghi chép phản hồi từ Người Quan Sát trong phiên bạn làm Coach.</li>
+                        </ul>
+                        <div class="pt-4">
+                            <label for="submissionNotes" class="tool-label">Ghi chú thêm cho giảng viên (nếu có):</label>
+                            <textarea id="submissionNotes" rows="4" placeholder="Bạn có thể chia sẻ thêm về những khó khăn hoặc câu hỏi bạn muốn được giải đáp trong buổi Group Call tiếp theo..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tool 3: Self-Assessment -->
+            <section id="assessment" class="content-section">
+                <div class="tool-card">
+                    <h2 class="text-3xl font-bold text-[#009688] mb-4">Biểu Mẫu Tự Đánh Giá Mức Độ Tự Tin</h2>
+                    <div class="p-4 bg-teal-50 rounded-lg border-l-4 border-teal-400 text-slate-700 mb-6">
+                        <h4 class="font-bold mb-1 text-[#009688]">Mục Đích Cốt Lõi</h4>
+                        <p>Giúp bạn có một cái nhìn định lượng về sự tiến bộ của mình. Việc theo dõi các con số này theo thời gian sẽ cho bạn thấy rõ sự trưởng thành và những nỗ lực của bạn đã mang lại kết quả như thế nào.</p>
+                    </div>
+                    <div class="space-y-6" id="assessment-form">
+                        <p class="text-slate-600">Trên thang điểm từ 1 (Hoàn toàn không tự tin) đến 5 (Rất tự tin), hãy đánh giá mức độ tự tin của bạn đối với các kỹ năng sau:</p>
+                        <!-- Skill 1 -->
+                        <div>
+                             <label class="tool-label">1. Khả năng lắng nghe sâu và thực sự thấu hiểu (không chỉ nghe để trả lời).</label>
+                             <div class="range-slider-container">
+                                <input type="range" min="1" max="5" value="3" step="0.5" class="range-slider">
+                                <span class="range-value">3.0</span>
+                             </div>
+                        </div>
+                        <!-- Skill 2 -->
+                        <div>
+                             <label class="tool-label">2. Khả năng đặt những câu hỏi mở, khơi gợi suy nghĩ thay vì câu hỏi đóng hoặc câu hỏi tư vấn.</label>
+                             <div class="range-slider-container">
+                                <input type="range" min="1" max="5" value="3" step="0.5" class="range-slider">
+                                <span class="range-value">3.0</span>
+                             </div>
+                        </div>
+                        <!-- Skill 3 -->
+                        <div>
+                             <label class="tool-label">3. Khả năng giữ im lặng và cho người khác không gian để suy nghĩ.</label>
+                             <div class="range-slider-container">
+                                <input type="range" min="1" max="5" value="3" step="0.5" class="range-slider">
+                                <span class="range-value">3.0</span>
+                             </div>
+                        </div>
+                    </div>
+                     <div class="mt-8 pt-4 border-t flex justify-end">
+                        <button class="bg-[#5C6BC0] hover:bg-[#1a237e] text-white font-bold py-2 px-6 rounded-lg transition duration-300">Lưu Đánh Giá</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center mt-12 py-6 text-slate-600 text-base border-t-2 border-slate-200">
+            <p class="font-semibold">Rosie Đào Hạnh Giang - CEO Build Talents</p>
+        </footer>
+
+        <div id="copy-notification">Đã sao chép vào bộ nhớ tạm!</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+            const notification = document.getElementById('copy-notification');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    const targetId = link.dataset.target;
+                    contentSections.forEach(section => section.classList.toggle('active', section.id === targetId));
+                    navLinks.forEach(navLink => navLink.classList.toggle('active', navLink.dataset.target === targetId));
+                });
+            });
+
+            function showCopyNotification() {
+                notification.classList.add('show');
+                setTimeout(() => notification.classList.remove('show'), 2000);
+            }
+
+            // Tool 1: Coaching Triad
+            document.getElementById('copyObservationBtn').addEventListener('click', () => {
+                let textToCopy = "PHIẾU QUAN SÁT PEER COACHING\n---------------------------------\n\n";
+                const fields = document.querySelectorAll('#observation-form textarea');
+                fields.forEach(field => {
+                    const label = field.previousElementSibling.textContent;
+                    textToCopy += `${label}\n${field.value}\n\n`;
+                });
+                navigator.clipboard.writeText(textToCopy.trim()).then(showCopyNotification);
+            });
+
+            // Tool 3: Self-Assessment
+            document.querySelectorAll('.range-slider').forEach(slider => {
+                const valueSpan = slider.nextElementSibling;
+                slider.addEventListener('input', (event) => {
+                    valueSpan.textContent = parseFloat(event.target.value).toFixed(1);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
