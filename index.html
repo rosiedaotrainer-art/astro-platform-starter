@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bộ Công Cụ Lãnh Đạo Coach</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Oswald', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        h1, h2, h3, h4 { font-family: 'Oswald', sans-serif; }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 4px solid transparent;
+            color: #5C6BC0;
+            padding: 12px 20px;
+            text-transform: uppercase;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        .nav-link.active {
+            border-bottom-color: #009688;
+            color: #009688;
+        }
+        .content-section { display: none; }
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tool-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+        }
+        textarea, input[type="text"], input[type="date"] {
+            width: 100%;
+            border: 1px solid #cbd5e1;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-family: sans-serif;
+            font-size: 1rem;
+        }
+        textarea:focus, input:focus {
+            outline: none;
+            border-color: #FF9800;
+            box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.2);
+        }
+        .tool-label {
+            font-weight: 600;
+            color: #1a237e;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        #copy-notification {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background-color: #1a237e; color: white; padding: 12px 24px;
+            border-radius: 8px; z-index: 100; opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease; visibility: hidden;
+        }
+        #copy-notification.show {
+            opacity: 1; transform: translateX(-50%) translateY(-20px); visibility: visible;
+        }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#1a237e]">Bộ Công Cụ Lãnh Đạo Coach</h1>
+            <p class="mt-3 text-lg text-slate-600 max-w-3xl mx-auto">Các công cụ tương tác thiết yếu để hỗ trợ hành trình chuyển hóa trong Tuần 1-2.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b border-slate-200 mb-10">
+            <button data-target="kickoff" class="nav-link active">1:1 Khởi Động</button>
+            <button data-target="charter" class="nav-link">Hiến Chương Nhóm</button>
+            <button data-target="smart" class="nav-link">Kế Hoạch SMART</button>
+            <button data-target="journal" class="nav-link">Nhật Ký Coaching</button>
+        </nav>
+
+        <main class="max-w-5xl mx-auto">
+            <!-- Tool 1: Kickoff Call -->
+            <section id="kickoff" class="content-section active">
+                <div class="tool-card">
+                    <h2 class="text-3xl font-bold text-[#009688] mb-4">Cấu Trúc Cuộc Gọi 1:1 "Khởi Động"</h2>
+                    <p class="text-slate-600 mb-6">Sử dụng cấu trúc này để đảm bảo mỗi cuộc gọi 20 phút đều tập trung, hiệu quả và tạo ra cam kết mạnh mẽ.</p>
+                    <div class="p-4 bg-teal-50 rounded-lg border-l-4 border-teal-400 text-slate-700 mb-6">
+                        <h4 class="font-bold mb-1 text-[#009688]">Mục Đích Cốt Lõi Của Công Cụ Này</h4>
+                        <p>Công cụ này không chỉ là một kịch bản, mà là một khung sườn để tạo ra một cuộc đối thoại sâu sắc, ý nghĩa. Mục đích là để biến sự hào hứng ban đầu thành một cam kết cá nhân rõ ràng và thiết lập một mối quan hệ tin tưởng, hỗ trợ ngay từ những bước đầu tiên của hành trình.</p>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-[#1a237e]">Phần 1: Check-in & Tái kết nối (5 phút)</h3>
+                            <ul class="list-disc list-inside mt-2 space-y-1 text-slate-700">
+                                <li>Hỏi thăm cảm nhận của học viên sau 2 ngày học.</li>
+                                <li>Câu hỏi gợi mở: "Khoảnh khắc đáng nhớ nhất hoặc bài học sâu sắc nhất bạn mang về từ khóa học là gì?"</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-[#1a237e]">Phần 2: Làm rõ & Cam kết với Mục tiêu 3 tháng (10 phút)</h3>
+                            <ul class="list-disc list-inside mt-2 space-y-1 text-slate-700">
+                                <li>Câu hỏi chính: "Với những gì đã học, mục tiêu quan trọng nhất bạn muốn đạt được cho bản thân với vai trò là một nhà lãnh đạo coach trong 3 tháng tới là gì?"</li>
+                                <li>Sử dụng kỹ thuật coaching để đào sâu: "Điều gì sẽ khác đi nếu bạn đạt được điều đó?", "Làm sao bạn biết mình đã thành công?".</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-[#1a237e]">Phần 3: Giải đáp & Thiết lập bước tiếp theo (5 phút)</h3>
+                            <ul class="list-disc list-inside mt-2 space-y-1 text-slate-700">
+                                <li>Câu hỏi hỗ trợ: "Bạn có bất kỳ câu hỏi hay lo lắng nào khi chúng ta bắt đầu hành trình này không?"</li>
+                                <li>Xác nhận các hoạt động tiếp theo (Thiết lập Hiến chương nhóm, Hoàn thiện Kế hoạch SMART).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-slate-200">
+                        <h3 class="text-xl font-semibold text-[#1a237e] mb-3">Mẹo Để Cuộc Gọi Thành Công Xuất Sắc</h3>
+                        <ul class="list-disc list-inside space-y-2 text-slate-700">
+                            <li><strong>Tạo không khí tin tưởng:</strong> Bắt đầu bằng sự chân thành và cởi mở để người đối diện cảm thấy an toàn khi chia sẻ.</li>
+                            <li><strong>Lắng nghe sâu:</strong> Tập trung 100% vào người nói, không chỉ nghe nội dung mà còn cả cảm xúc và những điều chưa nói.</li>
+                            <li><strong>Tập trung vào mục tiêu của học viên:</strong> Đây là buổi nói chuyện VỀ HỌ. Hãy để họ dẫn dắt và khám phá mục tiêu của chính mình.</li>
+                            <li><strong>Kết thúc bằng sự rõ ràng:</strong> Đảm bảo cả hai đều hiểu rõ các bước tiếp theo và cảm thấy tràn đầy năng lượng để bắt đầu.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tool 2: Team Charter -->
+            <section id="charter" class="content-section">
+                <div class="tool-card">
+                    <h2 class="text-3xl font-bold text-[#009688] mb-4">Công Cụ Tạo "Hiến Chương Nhóm"</h2>
+                    <p class="text-slate-600 mb-6">Cùng nhau điền các mục dưới đây để xây dựng bản thỏa thuận chung. Sau đó, nhấn "Tạo Hiến Chương" để có một văn bản hoàn chỉnh để sao chép và chia sẻ.</p>
+                    <div class="p-4 bg-teal-50 rounded-lg border-l-4 border-teal-400 text-slate-700 mb-6">
+                        <h4 class="font-bold mb-1 text-[#009688]">Mục Đích Cốt Lõi Của Công Cụ Này</h4>
+                        <p>Hiến chương không phải là một bộ quy tắc cứng nhắc. Mục đích của nó là tạo ra một "vùng an toàn tâm lý" được cả nhóm đồng kiến tạo. Đây là nền tảng cho sự tin tưởng, cho phép mọi người dám chia sẻ, dám thử nghiệm và dám thất bại để học hỏi cùng nhau trong suốt 3 tháng.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="charterVision" class="tool-label">Tầm nhìn chung:</label>
+                            <textarea id="charterVision" rows="3" placeholder="Ví dụ xuất sắc: 'Trở thành một nhóm hỗ trợ tin cậy, nơi chúng ta có thể chia sẻ thách thức một cách cởi mở, cùng nhau học hỏi và cam kết áp dụng coaching để tạo ra tác động thực sự cho đội nhóm của mình.'"></textarea>
+                        </div>
+                        <div>
+                            <label for="charterRules" class="tool-label">Quy tắc giao tiếp:</label>
+                            <textarea id="charterRules" rows="3" placeholder="Ví dụ xuất sắc: 'Luôn bảo mật. Lắng nghe để thấu hiểu, không phải để phán xét. Phản hồi thẳng thắn dựa trên quan sát, không suy diễn. Tôn trọng thời gian của nhau.'"></textarea>
+                        </div>
+                        <div>
+                            <label for="charterSupport" class="tool-label">Cam kết hỗ trợ:</label>
+                            <textarea id="charterSupport" rows="3" placeholder="Ví dụ xuất sắc: 'Sẵn sàng lắng nghe khi một thành viên cần chia sẻ. Chủ động hỏi thăm nếu thấy ai đó gặp khó khăn. Cùng nhau brainstorming giải pháp, không đưa ra lời khuyên trực tiếp.'"></textarea>
+                        </div>
+                        <div>
+                            <label for="charterAccountability" class="tool-label">Trách nhiệm:</label>
+                            <textarea id="charterAccountability" rows="3" placeholder="Ví dụ xuất sắc: 'Nhẹ nhàng nhắc nhở nhau về hiến chương nếu cần. Dành 5 phút cuối mỗi buổi Group Call để review nhanh cam kết của nhóm.'"></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-end">
+                        <button id="generateCharterBtn" class="bg-[#5C6BC0] hover:bg-[#1a237e] text-white font-bold py-2 px-6 rounded-lg transition duration-300">Tạo Hiến Chương</button>
+                    </div>
+                    <div id="charterOutput" class="mt-6 hidden">
+                         <h3 class="text-2xl font-semibold text-[#1a237e] mb-4">Hiến Chương Nhóm (Bản nháp)</h3>
+                         <pre id="charterText" class="bg-slate-100 p-4 rounded-lg whitespace-pre-wrap font-sans"></pre>
+                         <div class="mt-4 flex justify-end">
+                            <button id="copyCharterBtn" class="bg-[#FF9800] hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">Sao Chép</button>
+                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tool 3: SMART Plan -->
+            <section id="smart" class="content-section">
+                <div class="tool-card">
+                     <h2 class="text-3xl font-bold text-[#009688] mb-4">Công Cụ: Kế Hoạch Hành Động SMART</h2>
+                    <p class="text-slate-600 mb-6">Sử dụng biểu mẫu này để biến mục tiêu lớn thành những hành động cụ thể, có thể đo lường và theo dõi được.</p>
+                    <div class="p-4 bg-teal-50 rounded-lg border-l-4 border-teal-400 text-slate-700 mb-6">
+                        <h4 class="font-bold mb-1 text-[#009688]">Mục Đích Cốt Lõi Của Công Cụ Này</h4>
+                        <p>Kế hoạch SMART giúp chuyển hóa một ý định tốt đẹp thành một lộ trình hành động rõ ràng. Mục đích là để phá vỡ sự mơ hồ, tạo ra sự tập trung và cung cấp một cách thức minh bạch để tự theo dõi tiến độ, từ đó xây dựng trách nhiệm cá nhân và tạo ra những chiến thắng nhỏ liên tục.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="smartName" class="tool-label">Họ và tên:</label>
+                            <input type="text" id="smartName" placeholder="Điền tên của bạn">
+                        </div>
+                        <div>
+                            <label for="smartGoal" class="tool-label">Mục tiêu 3 tháng quan trọng nhất:</label>
+                            <textarea id="smartGoal" rows="2" placeholder="Ví dụ: 'Tích hợp thành công thói quen coaching vào các cuộc họp 1:1 hàng tuần để tăng cường sự chủ động và hiệu suất của nhân viên.'"></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <h3 class="text-xl font-semibold text-[#1a237e] mb-4">Hướng Dẫn Xây Dựng Hành Động SMART</h3>
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+                            <div class="p-3 bg-slate-50 rounded-lg"><strong>S - Specific (Cụ thể):</strong> Hành động của bạn có rõ ràng, dễ hiểu không?</div>
+                            <div class="p-3 bg-slate-50 rounded-lg"><strong>M - Measurable (Đo lường được):</strong> Làm sao bạn biết mình đã hoàn thành?</div>
+                            <div class="p-3 bg-slate-50 rounded-lg"><strong>A - Achievable (Khả thi):</strong> Bạn có đủ nguồn lực để thực hiện không?</div>
+                            <div class="p-3 bg-slate-50 rounded-lg"><strong>R - Relevant (Liên quan):</strong> Có giúp bạn tiến tới mục tiêu lớn không?</div>
+                            <div class="p-3 bg-slate-50 rounded-lg"><strong>T - Time-bound (Có thời hạn):</strong> Khi nào bạn sẽ hoàn thành?</div>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <h3 class="text-xl font-semibold text-[#1a237e] mb-2">Các hành động cụ thể:</h3>
+                        <div id="smart-rows-container" class="space-y-4">
+                             <!-- Dynamic rows will be inserted here -->
+                        </div>
+                        <div class="mt-4">
+                            <button id="addSmartRow" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-2 px-4 rounded-lg text-sm">+ Thêm hành động</button>
+                        </div>
+                    </div>
+                     <div class="mt-8 pt-4 border-t flex justify-end">
+                        <button id="copySmartPlan" class="bg-[#FF9800] hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">Sao chép Kế hoạch</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tool 4: Coaching Journal -->
+            <section id="journal" class="content-section">
+                <div id="journal-form" class="tool-card space-y-6">
+                    <h2 class="text-3xl font-bold text-[#009688] mb-4">Công Cụ: Nhật Ký Coaching</h2>
+                    <p class="text-slate-600 -mt-4 mb-2">Không gian dành riêng cho sự phản tư, ghi lại những "khoảnh khắc aha" và học hỏi từ chính trải nghiệm của bạn.</p>
+                    <div class="p-4 bg-teal-50 rounded-lg border-l-4 border-teal-400 text-slate-700 mb-6">
+                        <h4 class="font-bold mb-1 text-[#009688]">Mục Đích Cốt Lõi Của Công Cụ Này</h4>
+                        <p>Nhật ký coaching là công cụ mạnh mẽ nhất để đẩy nhanh quá trình học hỏi. Mục đích của nó không phải là để "báo cáo", mà là để thực hành kỹ năng quan trọng nhất của một người coach: tự nhận thức. Việc phản tư giúp bạn nhìn ra các khuôn mẫu, khám phá điểm mù và biến mỗi cuộc trò chuyện thành một bài học quý giá.</p>
+                    </div>
+                    <div class="p-4 bg-amber-50 rounded-lg border-l-4 border-amber-400 text-slate-700">
+                        <h4 class="font-bold mb-1">Hướng dẫn viết xuất sắc</h4>
+                        <p>Hãy viết chi tiết và tập trung vào sự tự nhận thức. Mục đích không phải là báo cáo, mà là để học hỏi từ chính hành động và suy nghĩ của mình. Càng cụ thể, bài học càng sâu sắc.</p>
+                    </div>
+                    <div>
+                        <label for="journalDate" class="tool-label">Ngày thực hành:</label>
+                        <input type="date" id="journalDate">
+                    </div>
+                    <div>
+                        <label for="journalContext" class="tool-label">Tình huống/Bối cảnh cuộc trò chuyện:</label>
+                        <textarea id="journalContext" rows="2" placeholder="Ví dụ: Trò chuyện với bạn A, một nhân viên giỏi nhưng gần đây có vẻ mất động lực. Mục đích là để tìm hiểu và khơi gợi lại năng lượng cho bạn."></textarea>
+                    </div>
+                    <div>
+                        <label for="journalQuestion" class="tool-label">1. Một câu hỏi hay nhất bạn đã đặt là gì? Tại sao bạn nghĩ nó hay?</label>
+                        <textarea id="journalQuestion" rows="3" placeholder="Ví dụ: Thay vì hỏi 'Tại sao em mất động lực?', tôi đã hỏi 'Điều gì sẽ khiến em cảm thấy hứng khởi trở lại khi đi làm mỗi sáng?'. Câu hỏi này mở ra một cuộc trò chuyện về mong muốn và giá trị của bạn, thay vì tập trung vào vấn đề."></textarea>
+                    </div>
+                    <div>
+                        <label for="journalGood" class="tool-label">2. Một điều bạn đã làm tốt trong phiên coaching này?</label>
+                        <textarea id="journalGood" rows="3" placeholder="Ví dụ: Tôi đã thực sự im lặng và lắng nghe sau khi đặt câu hỏi, không ngắt lời hay cố gắng đưa ra giải pháp ngay lập tức. Tôi nhận thấy có những khoảng lặng giá trị giúp bạn A suy nghĩ sâu hơn."></textarea>
+                    </div>
+                    <div>
+                        <label for="journalImprove" class="tool-label">3. Nếu có cơ hội, một điều bạn sẽ làm khác đi vào lần sau?</label>
+                        <textarea id="journalImprove" rows="3" placeholder="Ví dụ: Lần sau, tôi sẽ cố gắng đào sâu hơn nữa vào câu trả lời của bạn bằng câu hỏi 'Điều gì nữa?' để khám phá thêm các khía cạnh khác, thay vì chuyển sang chủ đề mới quá nhanh."></textarea>
+                    </div>
+                    <div>
+                        <label for="journalLearn" class="tool-label">4. Bạn đã học được điều gì mới về nhân viên/người được coach?</label>
+                        <textarea id="journalLearn" rows="3" placeholder="Ví dụ: Tôi nhận ra bạn A không mất động lực vì công việc, mà vì bạn cảm thấy chưa có cơ hội phát triển kỹ năng mới. Đây là một thông tin quan trọng mà trước đây tôi chưa biết."></textarea>
+                    </div>
+                    <div class="pt-4 flex flex-wrap gap-4 justify-end">
+                        <button id="clearJournalBtn" class="bg-slate-500 hover:bg-slate-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+                            Xóa Biểu Mẫu
+                        </button>
+                        <button id="copyJournalBtn" class="bg-[#FF9800] hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+                            Sao Chép Nội Dung
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center mt-12 py-6 text-slate-600 text-base border-t-2 border-slate-200">
+            <p class="font-semibold">Rosie Đào Hạnh Giang - CEO Build Talents</p>
+        </footer>
+
+        <div id="copy-notification">Đã sao chép vào bộ nhớ tạm!</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- General Tab Navigation ---
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    const targetId = link.dataset.target;
+                    contentSections.forEach(section => section.classList.toggle('active', section.id === targetId));
+                    navLinks.forEach(navLink => navLink.classList.toggle('active', navLink.dataset.target === targetId));
+                });
+            });
+
+            const notification = document.getElementById('copy-notification');
+            function showCopyNotification() {
+                notification.classList.add('show');
+                setTimeout(() => notification.classList.remove('show'), 2000);
+            }
+
+            // --- Tool 2: Team Charter ---
+            const generateCharterBtn = document.getElementById('generateCharterBtn');
+            const charterOutput = document.getElementById('charterOutput');
+            const charterText = document.getElementById('charterText');
+            const copyCharterBtn = document.getElementById('copyCharterBtn');
+
+            generateCharterBtn.addEventListener('click', () => {
+                const vision = document.getElementById('charterVision').value;
+                const rules = document.getElementById('charterRules').value;
+                const support = document.getElementById('charterSupport').value;
+                const accountability = document.getElementById('charterAccountability').value;
+                
+                charterText.textContent = `
+HIẾN CHƯƠNG NHÓM
+---------------------------------
+
+1. TẦM NHÌN CHUNG:
+${vision}
+
+2. QUY TẮC GIAO TIẾP:
+${rules}
+
+3. CAM KẾT HỖ TRỢ:
+${support}
+
+4. TRÁCH NHIỆM:
+${accountability}
+                `.trim();
+                charterOutput.classList.remove('hidden');
+            });
+
+            copyCharterBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(charterText.textContent).then(showCopyNotification);
+            });
+
+            // --- Tool 3: SMART Plan ---
+            const smartRowsContainer = document.getElementById('smart-rows-container');
+            const addSmartRowBtn = document.getElementById('addSmartRow');
+            const copySmartPlanBtn = document.getElementById('copySmartPlan');
+            let smartRowCount = 0;
+
+            function createSmartRow() {
+                smartRowCount++;
+                const row = document.createElement('div');
+                row.className = 'p-4 border rounded-lg bg-slate-50 relative';
+                row.innerHTML = `
+                    <button class="absolute top-2 right-2 text-slate-400 hover:text-red-500" onclick="this.parentElement.remove()">✖</button>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Hành động cụ thể (S)</label>
+                            <input type="text" data-field="s" class="text-sm" placeholder="Ví dụ: Tổ chức các buổi 1:1 hàng tuần với 2 nhân viên.">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Đo lường được (M)</label>
+                            <input type="text" data-field="m" class="text-sm" placeholder="Ví dụ: Hoàn thành 8 buổi 1:1 (2 nhân viên x 4 tuần).">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Tính khả thi (A)</label>
+                            <input type="text" data-field="a" class="text-sm" placeholder="Ví dụ: Đã có lịch cố định trong calendar, mỗi buổi 30 phút.">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Sự liên quan (R)</label>
+                            <input type="text" data-field="r" class="text-sm" placeholder="Ví dụ: Giúp nâng cao hiệu suất và gắn kết đội nhóm.">
+                        </div>
+                        <div class="md:col-span-2">
+                             <label class="block text-sm font-medium text-slate-700 mb-1">Thời gian (T)</label>
+                            <input type="text" data-field="t" class="text-sm" placeholder="Ví dụ: Bắt đầu từ tuần này, hoàn thành trước ngày 30/11.">
+                        </div>
+                    </div>`;
+                smartRowsContainer.appendChild(row);
+            }
+            addSmartRowBtn.addEventListener('click', createSmartRow);
+            createSmartRow(); // Add first row initially
+
+            copySmartPlanBtn.addEventListener('click', () => {
+                const name = document.getElementById('smartName').value;
+                const goal = document.getElementById('smartGoal').value;
+                let planText = `KẾ HOẠCH HÀNH ĐỘNG SMART\n---------------------------------\nHỌ VÀ TÊN: ${name}\nMỤC TIÊU 3 THÁNG: ${goal}\n\n`;
+
+                const rows = smartRowsContainer.querySelectorAll('.p-4');
+                rows.forEach((row, index) => {
+                    const s = row.querySelector('[data-field="s"]').value;
+                    const m = row.querySelector('[data-field="m"]').value;
+                    const a = row.querySelector('[data-field="a"]').value;
+                    const r = row.querySelector('[data-field="r"]').value;
+                    const t = row.querySelector('[data-field="t"]').value;
+                    planText += `HÀNH ĐỘNG ${index + 1}:\n- S: ${s}\n- M: ${m}\n- A: ${a}\n- R: ${r}\n- T: ${t}\n\n`;
+                });
+                 navigator.clipboard.writeText(planText.trim()).then(showCopyNotification);
+            });
+
+
+            // --- Tool 4: Coaching Journal ---
+            const copyJournalBtn = document.getElementById('copyJournalBtn');
+            const clearJournalBtn = document.getElementById('clearJournalBtn');
+            const journalForm = document.getElementById('journal-form');
+            
+            clearJournalBtn.addEventListener('click', () => {
+                journalForm.querySelectorAll('input, textarea').forEach(el => el.value = '');
+            });
+
+            copyJournalBtn.addEventListener('click', () => {
+                const textToCopy = `
+NHẬT KÝ COACHING
+---------------------------------
+Ngày thực hành: ${document.getElementById('journalDate').value}
+Tình huống/Bối cảnh: ${document.getElementById('journalContext').value}
+1. Câu hỏi hay nhất: ${document.getElementById('journalQuestion').value}
+2. Điều làm tốt: ${document.getElementById('journalGood').value}
+3. Điều cần cải thiện: ${document.getElementById('journalImprove').value}
+4. Điều học được: ${document.getElementById('journalLearn').value}
+                `.trim();
+                navigator.clipboard.writeText(textToCopy).then(showCopyNotification);
+            });
+        });
+    </script>
+</body>
+</html>
+
+
