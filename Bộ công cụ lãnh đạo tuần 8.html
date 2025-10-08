@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bộ Công Cụ: Tuần 8</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Oswald', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        h1, h2, h3, h4 { font-family: 'Oswald', sans-serif; }
+        .nav-link { transition: all 0.3s ease; border-bottom: 4px solid transparent; color: #5C6BC0; padding: 12px 20px; text-transform: uppercase; font-weight: 500; font-size: 1rem; }
+        .nav-link.active { border-bottom-color: #009688; color: #009688; }
+        .content-section { display: none; }
+        .content-section.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .tool-card { background-color: white; padding: 2rem; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); }
+        textarea { width: 100%; border: 1px solid #cbd5e1; padding: 10px; border-radius: 8px; transition: all 0.3s ease; font-family: sans-serif; font-size: 1rem; }
+        textarea:focus { outline: none; border-color: #FF9800; box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.2); }
+        .tool-label { font-weight: 600; color: #1a237e; margin-bottom: 0.5rem; display: block; }
+        #copy-notification { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: #1a237e; color: white; padding: 12px 24px; border-radius: 8px; z-index: 100; opacity: 0; transition: opacity 0.5s ease, transform 0.5s ease; visibility: hidden; }
+        #copy-notification.show { opacity: 1; transform: translateX(-50%) translateY(-20px); visibility: visible; }
+        .range-slider-container { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 1rem; }
+        input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; background: #ddd; border-radius: 5px; outline: none; }
+        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; background: #FF9800; border-radius: 50%; cursor: pointer; }
+        input[type="range"]::-moz-range-thumb { width: 24px; height: 24px; background: #FF9800; border-radius: 50%; cursor: pointer; }
+        .range-value { font-weight: bold; color: #FF9800; font-size: 1.25rem; min-width: 40px; text-align: center; }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#1a237e]">Bộ Công Cụ Tuần 8</h1>
+            <p class="mt-3 text-lg text-slate-600 max-w-3xl mx-auto">Các công cụ hỗ trợ cho hoạt động Peer Coaching #2.</p>
+        </header>
+
+        <nav class="flex flex-wrap justify-center border-b border-slate-200 mb-10">
+            <button data-target="brainstorm" class="nav-link active">Brainstorming Tạo Sinh</button>
+            <button data-target="actionplan" class="nav-link">Kế Hoạch Hành Động</button>
+            <button data-target="submission" class="nav-link">Nộp Bài Tập</button>
+        </nav>
+
+        <main class="max-w-5xl mx-auto">
+            <!-- Tool 1: Generative Brainstorming -->
+            <section id="brainstorm" class="content-section active">
+                <div class="tool-card">
+                    <h2 class="text-3xl font-bold text-[#009688] mb-4">Công Cụ: "Brainstorming Tạo Sinh"</h2>
+                    <div class="p-4 bg-teal-50 rounded-lg border-l-4 border-teal-400 text-slate-700 mb-6">
+                        <h4 class="font-bold mb-1 text-[#009688]">Mục Đích Cốt Lõi</h4>
+                        <p>Trang bị cho người coach một "bộ câu hỏi" mạnh mẽ để phá vỡ lối mòn tư duy của coachee, giúp họ nhìn vấn đề từ nhiều góc độ và khám phá những giải pháp mà trước đây họ chưa từng nghĩ tới.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-[#1a237e] mb-3">Checklist cho Người Quan Sát</h3>
+                            <ul class="list-disc list-inside space-y-2 text-slate-700">
+                                <li>Coach có thực sự tạo không gian để coachee tự do suy nghĩ không?</li>
+                                <li>Coach có đưa ra lời khuyên/gợi ý trá hình không?</li>
+                                <li>Câu hỏi nào của coach tạo ra nhiều năng lượng và ý tưởng nhất?</li>
+                                <li>Coach có khen ngợi nỗ lực suy nghĩ của coachee không?</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-[#1a237e] mb-3">Bộ Câu Hỏi "Tạo Sinh" Gợi Ý</h3>
+                            <ul class="list-disc list-inside space-y-2 text-slate-700">
+                                <li>Nếu bạn có một cây đũa thần, bạn sẽ làm gì?</li>
+                                <li>Nếu bạn nhìn vấn đề này từ góc nhìn của sếp bạn / khách hàng, bạn sẽ thấy gì?</li>
+                                <li>Cách tiếp cận điên rồ nhất bạn có thể nghĩ ra là gì?</li>
+                                <li>Điều gì sẽ xảy ra nếu bạn không làm gì cả?</li>
+                                <li>Nếu tiền bạc/thời gian không phải là vấn đề, bạn sẽ làm gì?</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Tool 2: Action Plan -->
+            <section id="actionplan" class="content-section">
+                <div class="tool-card">
+                    <h2 class="text-3xl font-bold text-[#009688] mb-4">Mẫu Xây Dựng Kế Hoạch Hành Động</h2>
+                     <div class="p-4 bg-teal-50 rounded-lg border-l-4 border-teal-400 text-slate-700 mb-6">
+                        <h4 class="font-bold mb-1 text-[#009688]">Mục Đích Cốt Lõi</h4>
+                        <p>Cung cấp một khung sườn rõ ràng để biến ý tưởng thành hành động, đảm bảo coachee rời khỏi buổi coaching với sự tự tin và một lộ trình cụ thể để thực hiện, thay vì chỉ là những suy nghĩ mơ hồ.</p>
+                    </div>
+                    <div class="space-y-6" id="actionplan-form">
+                        <div>
+                            <label class="tool-label">Hành động cụ thể bạn sẽ thực hiện là gì? (Specific)</label>
+                            <textarea rows="2" placeholder="Ví dụ: 'Tôi sẽ nói chuyện với X về vấn đề Y.'"></textarea>
+                        </div>
+                        <div>
+                            <label class="tool-label">Làm thế nào bạn biết mình đã hoàn thành? (Measurable)</label>
+                            <textarea rows="2" placeholder="Ví dụ: 'Sau cuộc nói chuyện, X và tôi sẽ cùng thống nhất được 3 giải pháp.'"></textarea>
+                        </div>
+                         <div>
+                            <label class="tool-label">Khi nào bạn sẽ thực hiện việc này? (Time-bound)</label>
+                            <textarea rows="1" placeholder="Ví dụ: 'Vào 3 giờ chiều thứ Sáu tuần này.'"></textarea>
+                        </div>
+                        <div>
+                             <label class="tool-label">Trên thang điểm từ 1-10, mức độ cam kết của bạn là bao nhiêu?</label>
+                             <div class="range-slider-container">
+                                <input type="range" min="1" max="10" value="7" step="1" class="range-slider">
+                                <span class="range-value">7</span>
+                             </div>
+                             <p class="text-sm text-slate-500 mt-2">Câu hỏi gợi ý nếu điểm thấp: "Điều gì sẽ giúp bạn tăng cam kết lên điểm 8 hoặc 9?"</p>
+                        </div>
+                        <div>
+                            <label class="tool-label">Bạn cần sự hỗ trợ nào từ tôi hoặc người khác?</label>
+                            <textarea rows="2" placeholder="Ví dụ: 'Tôi chỉ cần bạn hỏi thăm tôi về kết quả vào thứ Hai tuần sau.'"></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-4 border-t flex justify-end">
+                        <button id="copyActionPlanBtn" class="bg-[#FF9800] hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">Sao chép Kế Hoạch</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tool 3: Submission -->
+            <section id="submission" class="content-section">
+                <div class="tool-card">
+                    <h2 class="text-3xl font-bold text-[#009688] mb-4">Hướng Dẫn Nộp Bài Tập</h2>
+                    <div class="p-4 bg-teal-50 rounded-lg border-l-4 border-teal-400 text-slate-700 mb-6">
+                        <h4 class="font-bold mb-1 text-[#009688]">Mục Đích Cốt Lõi</h4>
+                        <p>Đảm bảo việc học tập được củng cố và giảng viên có đủ thông tin để hỗ trợ nhóm một cách tốt nhất. Đây là hành động thể hiện sự cam kết và trách nhiệm với quá trình phát triển của bản thân và của cả nhóm.</p>
+                    </div>
+                    <div class="space-y-4 text-slate-700">
+                        <p class="font-semibold">Vui lòng nộp lại 2 tài liệu sau cho giảng viên trong vòng 24 giờ sau buổi thực hành:</p>
+                        <ul class="list-decimal list-inside ml-4 space-y-2">
+                            <li><strong>Nhật Ký Coaching của bạn:</strong> Hoàn thành dựa trên phiên bạn đóng vai trò là Coach. (Sử dụng mẫu trong Bộ Công Cụ Tuần 1-2).</li>
+                            <li><strong>Phiếu Quan Sát bạn nhận được:</strong> Bản ghi chép phản hồi từ Người Quan Sát trong phiên bạn làm Coach. (Sử dụng mẫu trong Bộ Công Cụ Tuần 4).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center mt-12 py-6 text-slate-600 text-base border-t-2 border-slate-200">
+            <p class="font-semibold">Rosie Đào Hạnh Giang - CEO Build Talents</p>
+        </footer>
+
+        <div id="copy-notification">Đã sao chép vào bộ nhớ tạm!</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+            const notification = document.getElementById('copy-notification');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    const targetId = link.dataset.target;
+                    contentSections.forEach(section => section.classList.toggle('active', section.id === targetId));
+                    navLinks.forEach(navLink => navLink.classList.toggle('active', navLink.dataset.target === targetId));
+                });
+            });
+
+            function showCopyNotification() {
+                notification.classList.add('show');
+                setTimeout(() => notification.classList.remove('show'), 2000);
+            }
+            
+            document.querySelectorAll('.range-slider').forEach(slider => {
+                const valueSpan = slider.nextElementSibling;
+                slider.addEventListener('input', (event) => {
+                    valueSpan.textContent = event.target.value;
+                });
+            });
+
+            document.getElementById('copyActionPlanBtn').addEventListener('click', () => {
+                let textToCopy = "KẾ HOẠCH HÀNH ĐỘNG\n---------------------------------\n\n";
+                const fields = document.querySelectorAll('#actionplan-form textarea');
+                const labels = document.querySelectorAll('#actionplan-form .tool-label');
+                fields.forEach((field, index) => {
+                    textToCopy += `${labels[index].textContent}\n${field.value}\n\n`;
+                });
+                const commitmentSlider = document.querySelector('#actionplan-form input[type="range"]');
+                const commitmentLabel = commitmentSlider.parentElement.previousElementSibling;
+                textToCopy += `${commitmentLabel.textContent}\n${commitmentSlider.value}/10\n\n`;
+                navigator.clipboard.writeText(textToCopy.trim()).then(showCopyNotification);
+            });
+        });
+    </script>
+</body>
+</html>
